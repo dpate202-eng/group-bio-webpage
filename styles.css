@@ -1,90 +1,332 @@
-/* General page styling */
+/* =====================
+   CSS Custom Properties
+   ===================== */
+:root {
+  --brand: #5B5FEF;
+  --brand-dark: #3F43C7;
+  --brand-light: #EEEDFE;
+  --surface: #ffffff;
+  --surface-2: #F7F7FB;
+  --surface-3: #EEEEF8;
+  --text-primary: #1A1A2E;
+  --text-secondary: #6B6B8A;
+  --text-muted: #9999B8;
+  --border: rgba(91, 95, 239, 0.15);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.07);
+  --shadow-hover: 0 8px 24px rgba(91, 95, 239, 0.12);
+  --transition: 0.22s ease;
+}
+
+/* =====================
+   Base Reset
+   ===================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--surface-2);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
 }
 
-/* Header section styling */
+/* =====================
+   Header
+   ===================== */
 header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 20px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
-/* Styling for team logo image */
+header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--brand), #9B5DE5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
 .team-logo {
-    width: 150px; /* Adjust the size as needed */
-    margin-top: 10px;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  padding: 4px;
+  background: var(--surface);
 }
 
-/* Menu button styling */
+/* =====================
+   Navigation
+   ===================== */
 header nav {
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
 }
 
-header nav button {
-    background: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 0 5px;
+.nav-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 8px 22px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
 }
 
-header nav button:hover {
-    background: #0056b3;
+.nav-btn:hover {
+  background: var(--brand-light);
+  color: var(--brand);
+  border-color: var(--brand);
 }
 
-/* Flex container for team bios and vision sections */
-.container {
-    width: 80%;
-    margin: 20px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.nav-btn.active {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
 }
 
-/* Card styling for individual team bios */
+/* =====================
+   Section Transitions
+   ===================== */
+.section {
+  display: none;
+  animation: fadeUp 0.3s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================
+   Cards Grid
+   ===================== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  padding: 28px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    padding: 20px;
-    flex: 1 1 calc(30% - 40px);
-    text-align: center;
-    transition: transform 0.2s;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 26px 22px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .card:hover {
-    transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
 }
 
-h2 {
-    margin: 0 0 10px;
+/* =====================
+   Avatar
+   ===================== */
+.avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--brand-light);
+  margin-bottom: 14px;
 }
 
-/* Initially hide bio details */
+.avatar-fallback {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--brand-light);
+  color: var(--brand);
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+
+/* =====================
+   Card Typography
+   ===================== */
+.card h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.card .role {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  line-height: 1.45;
+}
+
+/* =====================
+   Toggle Button
+   ===================== */
+.toggle-btn {
+  background: var(--surface-2);
+  color: var(--brand);
+  border: 1px solid var(--border);
+  padding: 7px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.toggle-btn:hover {
+  background: var(--brand-light);
+}
+
+.toggle-btn.open {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
+}
+
+/* =====================
+   Bio Text (animated)
+   ===================== */
 .bio {
-    display: none;
-    margin-top: 10px;
-    color: #555;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  text-align: left;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
 }
 
-/* Button styling */
-button {
-    background: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+.bio.visible {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 12px;
 }
 
-button:hover {
-    background: #0056b3;
+/* =====================
+   Moodboard / Tags
+   ===================== */
+.moodboard {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.moodboard h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 12px;
+  padding: 4px 11px;
+  border-radius: 50px;
+  background: var(--surface-3);
+  color: var(--brand);
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+
+/* =====================
+   Vision Section
+   ===================== */
+.vision-wrap {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 36px 24px;
+}
+
+.vision-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px 26px;
+  box-shadow: var(--shadow-card);
+}
+
+.vision-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.vision-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 22px;
+}
+
+.vision-card h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.rules {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rules li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 11px 14px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--brand);
+  transition: background var(--transition);
+}
+
+.rules li:hover {
+  background: var(--brand-light);
 }

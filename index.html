@@ -3,112 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Bio</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+    <title>Team Bio – DAN</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header>
     <h1>Meet DAN</h1>
-    <!-- Example team logo -->
     <img src="img/team-logo.png" alt="Team Logo" class="team-logo">
 
-    <!-- Navigation menu to switch between sections -->
     <nav>
-        <button onclick="showSection('bios')">Team Bios</button>
-        <button onclick="showSection('vision')">Team Vision</button>
+        <button class="nav-btn active" data-section="bios">Team Bios</button>
+        <button class="nav-btn" data-section="vision">Team Vision</button>
     </nav>
 </header>
 
-<!-- Team bios section (default section) -->
-<div id="bios" class="container">
+<!-- Team Bios (default) -->
+<div id="bios" class="section active">
+    <div class="cards-grid">
 
-    <!-- Diya -->
-    <div class="card">
-    <img src="images/diya.jpg" alt="Diya Patel" width="120">
+        <!-- Diya -->
+        <div class="card">
+            <img src="images/diya.jpg" alt="Diya Patel" class="avatar"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="avatar-fallback" style="display:none">DP</div>
 
-    <h2>Diya Patel</h2>
-    <p>Computer Science Student | Data Science Focus</p>
+            <h2>Diya Patel</h2>
+            <p class="role">Computer Science Student · Data Science Focus</p>
 
-    <button onclick="toggleBio('bio1')">Show Bio</button>
-    <p id="bio1" class="bio">
-        I am a Computer Science student focused on Data Science and web structure using HTML.
-        I enjoy organizing data, building clean layouts, and turning ideas into structured web pages.
-    </p>
+            <button class="toggle-btn" data-bio="bio1">Show Bio</button>
+            <p id="bio1" class="bio">
+                I'm a CS student focused on Data Science and web structure.
+                I enjoy organizing data, building clean layouts, and turning ideas into structured web pages.
+            </p>
 
-    <h3>Moodboard</h3>
-    <ul>
-        <li> Data Science & Analytics</li>
-        <li> HTML & Web Structure</li>
-        <li> Python for Data Analysis</li>
-        <li> Data Visualization</li>
-    </ul>
+            <div class="moodboard">
+                <h3>Interests</h3>
+                <div class="tags">
+                    <span class="tag">Data Science</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Visualization</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nirvan -->
+        <div class="card">
+            <img src="images/nirvan.jpg" alt="Nirvan Jaffari" class="avatar"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="avatar-fallback" style="display:none">NJ</div>
+
+            <h2>Nirvan Jaffari</h2>
+            <p class="role">CS & Data Science · Front-End Developer</p>
+
+            <button class="toggle-btn" data-bio="bio2">Show Bio</button>
+            <p id="bio2" class="bio">
+                Majoring in CS and Data Science with a focus on front-end development.
+                I love designing responsive, interactive, and visually appealing user interfaces.
+            </p>
+
+            <div class="moodboard">
+                <h3>Interests</h3>
+                <div class="tags">
+                    <span class="tag">UI/UX Design</span>
+                    <span class="tag">HTML/CSS/JS</span>
+                    <span class="tag">Responsive Design</span>
+                    <span class="tag">Frameworks</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Addison -->
+        <div class="card">
+            <img src="images/addison.jpg" alt="Addison Amadi" class="avatar"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="avatar-fallback" style="display:none">AA</div>
+
+            <h2>Addison Amadi</h2>
+            <p class="role">Computer Science Student · JavaScript Developer</p>
+
+            <button class="toggle-btn" data-bio="bio3">Show Bio</button>
+            <p id="bio3" class="bio">
+                Focused on JavaScript development and interactive functionality.
+                I enjoy building dynamic features that make websites more engaging and functional.
+            </p>
+
+            <div class="moodboard">
+                <h3>Interests</h3>
+                <div class="tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Problem Solving</span>
+                    <span class="tag">Web Apps</span>
+                    <span class="tag">APIs</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-    <!-- Nirvan -->
-    <div class="card">
-    <img src="images/nirvan.jpg" alt="Nirvan" width="120">
+<!-- Team Vision -->
+<div id="vision" class="section">
+    <div class="vision-wrap">
+        <div class="vision-card">
+            <h2>Our Mission</h2>
+            <p>
+                We combine creativity and technical skills to build innovative,
+                user-centered solutions. We value collaboration, continuous learning,
+                and pushing the boundaries of what we can create as computer scientists.
+            </p>
 
-    <h2>Nirvan Jaffari</h2>
-    <p>Computer Science & Data Science | Front-End Developer</p>
-
-    <button onclick="toggleBio('bio2')">Show Bio</button>
-    <p id="bio2" class="bio">
-        I am majoring in Computer Science and Data Science with a focus on front-end development.
-        I enjoy designing responsive, interactive, and visually appealing user interfaces.
-    </p>
-
-    <h3>Moodboard</h3>
-    <ul>
-        <li> UI/UX Design</li>
-        <li> HTML, CSS, JavaScript</li>
-        <li> Responsive Design</li>
-        <li> Front-End Frameworks</li>
-    </ul>
+            <h3>Team Rules</h3>
+            <ul class="rules">
+                <li>Communicate openly and consistently</li>
+                <li>Respect all ideas and contributions</li>
+                <li>Stay accountable and meet deadlines</li>
+                <li>Support each other when challenges arise</li>
+            </ul>
+        </div>
+    </div>
 </div>
 
-    <!-- Addison -->
-    <div class="card">
-    <img src="images/addison.jpg" alt="Addison" width="120">
-
-    <h2>Addison Amadi</h2>
-    <p>Computer Science Student | JavaScript Developer</p>
-
-    <button onclick="toggleBio('bio3')">Show Bio</button>
-    <p id="bio3" class="bio">
-        I focus on JavaScript development and interactive functionality.
-        I enjoy building dynamic features that make websites more engaging and functional.
-    </p>
-
-    <h3>Moodboard</h3>
-    <ul>
-        <li> JavaScript Programming</li>
-        <li> Problem Solving</li>
-        <li> Interactive Web Apps</li>
-        <li> APIs & Logic Building</li>
-    </ul>
-</div>
-
-</div>
-<!-- Team vision/mission statement section (hidden by default) -->
-<div id="vision" class="container" style="display: none;">
-    <h2>Our Mission</h2>
-    <p>
-        Our mission is to combine creativity and technical skills to build innovative,
-        user-centered solutions. As a team, we value collaboration, continuous learning,
-        and pushing the boundaries of what we can create as computer scientists.
-    </p>
-
-    <h3>Team Rules</h3>
-    <ul>
-        <li>Communicate openly and consistently</li>
-        <li>Respect all ideas and contributions</li>
-        <li>Stay accountable and meet deadlines</li>
-        <li>Support each other when challenges arise</li>
-    </ul>
-</div>
-
-<script src="script.js"></script> <!-- Link to external JavaScript file -->
-
+<script src="script.js"></script>
 </body>
 </html>

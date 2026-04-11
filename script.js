@@ -1,33 +1,41 @@
 /**
- * Toggles the display of an individual team member's bio
- * @param {string} bioId - The ID of the bio section to show or hide
+ * DAN Team Bio — script.js
+ * Uses event delegation and data attributes instead of inline onclick handlers.
+ * Bio toggle animates via CSS class (no inline style juggling).
  */
-function toggleBio(bioId) {
-    const bio = document.getElementById(bioId);
-    // Toggle between showing and hiding the bio section
-    if (bio.style.display === "none" || bio.style.display === "") {
-        bio.style.display = "block";
-    } else {
-        bio.style.display = "none";
-    }
-}
 
-/**
- * Shows the specified section ('bios' or 'vision') and hides the other
- * @param {string} sectionId - The ID of the section to display
- */
-function showSection(sectionId) {
-    const biosSection = document.getElementById("bios");
-    const visionSection = document.getElementById("vision");
+document.addEventListener("DOMContentLoaded", () => {
 
-    // Display the bios section and hide the vision section
-    if (sectionId === "bios") {
-        biosSection.style.display = "flex";
-        visionSection.style.display = "none";
-    }
-    // Display the vision section and hide the bios section
-    else if (sectionId === "vision") {
-        biosSection.style.display = "none";
-        visionSection.style.display = "block";
-    }
-}
+  // ── Navigation ──────────────────────────────────────────────
+  const navButtons = document.querySelectorAll(".nav-btn");
+  const sections   = document.querySelectorAll(".section");
+
+  navButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.section;
+
+      // Update active nav button
+      navButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Swap visible section
+      sections.forEach(sec => {
+        sec.classList.toggle("active", sec.id === target);
+      });
+    });
+  });
+
+  // ── Bio Toggles ─────────────────────────────────────────────
+  document.querySelectorAll(".toggle-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const bioId = btn.dataset.bio;
+      const bio   = document.getElementById(bioId);
+      if (!bio) return;
+
+      const isOpen = bio.classList.toggle("visible");
+      btn.textContent = isOpen ? "Hide Bio" : "Show Bio";
+      btn.classList.toggle("open", isOpen);
+    });
+  });
+
+});
