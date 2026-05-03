@@ -1,15 +1,11 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Float, Enum, ForeignKey
 from db import Base
 
 class Payment(Base):
     __tablename__ = "payments"
 
-    payment_id = Column(Integer, primary_key=True, index=True)
-    order_id = Column(Integer, ForeignKey("orders.order_id"), nullable=False)
-    method = Column(String, nullable=False)
-    status = Column(String, default="pending")
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(Integer, ForeignKey("orders.id"), nullable=False)
+    method = Column(Enum("cash", "credit_card", "debit_card", "online", name="payment_method"), nullable=False)
     amount = Column(Float, nullable=False)
-
-    # Relationships
-    order = relationship("Order", back_populates="payment")
+    status = Column(Enum("pending", "completed", "failed", "refunded", name="payment_status"), default="pending")

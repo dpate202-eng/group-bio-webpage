@@ -1,16 +1,21 @@
 from pydantic import BaseModel
+from typing import Optional
 
-class PaymentBase(BaseModel):
+class PaymentCreate(BaseModel):
     order_id: int
     method: str
-    status: str = "pending"
     amount: float
 
-class PaymentCreate(PaymentBase):
-    pass
+class PaymentUpdate(BaseModel):
+    status: Optional[str] = None
+    method: Optional[str] = None
 
-class PaymentResponse(PaymentBase):
-    payment_id: int
+class PaymentOut(BaseModel):
+    id: int
+    order_id: int
+    method: str
+    amount: float
+    status: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -1,17 +1,22 @@
 from pydantic import BaseModel
 from typing import Optional
 
-class ReviewBase(BaseModel):
-    user_id: int
-    item_id: int
+class ReviewCreate(BaseModel):
+    order_id: int
+    user_id: Optional[int] = None
     rating: int
     comment: Optional[str] = None
 
-class ReviewCreate(ReviewBase):
-    pass
+class ReviewUpdate(BaseModel):
+    rating: Optional[int] = None
+    comment: Optional[str] = None
 
-class ReviewResponse(ReviewBase):
-    review_id: int
+class ReviewOut(BaseModel):
+    id: int
+    order_id: int
+    user_id: Optional[int]
+    rating: int
+    comment: Optional[str]
 
     class Config:
-        orm_mode = True
+        from_attributes = True

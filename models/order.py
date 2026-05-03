@@ -1,18 +1,15 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
-from datetime import datetime
+from sqlalchemy import Column, Integer, String, Float, Enum, ForeignKey
 from db import Base
 
 class Order(Base):
     __tablename__ = "orders"
 
-    order_id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
-    status = Column(String, default="confirmed")
-    delivery_method = Column(String)
-    created_at = Column(DateTime, default=datetime.utcnow)
-
-    # Relationships
-    user = relationship("User", back_populates="orders")
-    order_items = relationship("OrderItem", back_populates="order")
-    payment = relationship("Payment", back_populates="order", uselist=False)
+    id = Column(Integer, primary_key=True, index=True)
+    customer_name = Column(String, nullable=False)
+    customer_phone = Column(String, nullable=False)
+    customer_address = Column(String, nullable=True)
+    order_type = Column(Enum("delivery", "takeout", name="order_type"), default="takeout")
+    status = Column(Enum("pending", "preparing", "ready", "delivered", "cancelled", name="order_status"), default="pending")
+    total_price = Column(Float, default=0.0)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    promo_code_id = Column(Integer, ForeignKey("promo_codes.id"), nullable=True)
